@@ -15,15 +15,16 @@ char memoryOffset = 0;
 
 void port_init()			//	port initialization function
 {
-
+	P1OUT &= ~BIT0;			//turn off RED LED
+	P2OUT &= ~BIT1;			//turn off GREEN LED
 	P1DIR |= BIT0;			// make P1.0 an output (RED LED)
 	P1DIR &= ~BIT4;			// make P1.4 and input
 	P1REN |= BIT4;			// enable pull resistor on P1.4
 	P1OUT |= BIT4;			// make it a pull-up resistor
 	P2DIR |= BIT1;			// make P2.1 an output (GREEN LED)
 
-	P1OUT &= ~BIT0;			//turn off RED LED
-	P2OUT &= ~BIT1;			//turn off GREEN LED
+//	P1OUT &= ~BIT0;			//turn off RED LED
+//	P2OUT &= ~BIT1;			//turn off GREEN LED
 
 }
 void delay_1sec()      	// 1 second delay for 1.5 MHz clock
@@ -39,7 +40,9 @@ void main(void)
 	port_init();
 	memoryOffset = 0;					//making sure my offset is set to 0
 	WDTCTL = WDTPW |WDTSSEL_3|WDTIS_4|WDTCNTCL;	// Watchdog timer set to expire every second
-
+    PCM_setCoreVoltageLevel(PCM_VCORE1);
+	MAP_FlashCtl_setWaitState(FLASH_BANK0,2);
+	MAP_FlashCtl_setWaitState(FLASH_BANK1,2);
 	while(1){
 		WDTCTL = WDTPW | WDTCNTCL;		//clear watchdog each loop of the almighty while
 	if (!(P1IN & BIT4)){				//check if button is pushed and initiate functions if true
@@ -53,9 +56,9 @@ void main(void)
 	WDTCTL = WDTPW | WDTCNTCL;
 	MAP_FlashCtl_unprotectSector(FLASH_INFO_MEMORY_SPACE_BANK0,FLASH_SECTOR0<<memoryOffset);
 	WDTCTL = WDTPW | WDTCNTCL;
-	while(!MAP_FlashCtl_eraseSector(BUFFER_MEMORY_START+memoryOffset*4096));
+	MAP_FlashCtl_eraseSector(BUFFER_MEMORY_START+memoryOffset*4096);
     WDTCTL = WDTPW | WDTCNTCL;
-    while(!MAP_FlashCtl_programMemory(buffer,(void*) (BUFFER_MEMORY_START+memoryOffset*4096), 4096 ));
+    MAP_FlashCtl_programMemory(buffer,(void*) (BUFFER_MEMORY_START+memoryOffset*4096), 4096 );
     WDTCTL = WDTPW | WDTCNTCL;
     MAP_FlashCtl_protectSector(FLASH_INFO_MEMORY_SPACE_BANK0,FLASH_SECTOR0<<memoryOffset);
     WDTCTL = WDTPW | WDTCNTCL;
