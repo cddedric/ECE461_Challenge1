@@ -53,7 +53,7 @@ void main(void)
 	WDTCTL = WDTPW | WDTCNTCL;
 	MAP_FlashCtl_unprotectSector(FLASH_INFO_MEMORY_SPACE_BANK0,FLASH_SECTOR0<<memoryOffset);
 	WDTCTL = WDTPW | WDTCNTCL;
-	while(!MAP_FlashCtl_eraseSector(BUFFER_MEMORY_START));
+	while(!MAP_FlashCtl_eraseSector(BUFFER_MEMORY_START+memoryOffset*4096));
     WDTCTL = WDTPW | WDTCNTCL;
     while(!MAP_FlashCtl_programMemory(buffer,(void*) (BUFFER_MEMORY_START+memoryOffset*4096), 4096 ));
     WDTCTL = WDTPW | WDTCNTCL;
