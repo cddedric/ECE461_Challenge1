@@ -9,7 +9,7 @@
 
 #include "string.h"
 
-#define BUFFER_MEMORY_START 0x0202000
+#define BUFFER_MEMORY_START 0x02000
 
 unsigned short int memoryOffset = 0;
 
