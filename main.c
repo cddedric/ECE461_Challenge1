@@ -10,6 +10,7 @@
 #include "string.h"
 
 #define BUFFER_MEMORY_START 0x02000
+#define MEM_UPPER_LIMIT		0x03FFF
 
 unsigned short int memoryOffset = 0;
 
@@ -37,6 +38,7 @@ void delay_1sec()      	// 1 second delay for 1.5 MHz clock
 
 void main(void)
 {
+	WDTCTL = WDTPW | WDTCNTCL;
 	port_init();
 	memoryOffset = 0;					//making sure my offset is set to 0
 	WDTCTL = WDTPW |WDTSSEL_3|WDTIS_4|WDTCNTCL;	// Watchdog timer set to expire every second
@@ -45,6 +47,7 @@ void main(void)
     PCM_setCoreVoltageLevel(PCM_VCORE1);
 	MAP_FlashCtl_setWaitState(FLASH_BANK0,2);
 	MAP_FlashCtl_setWaitState(FLASH_BANK1,2);
+
 	while(1){
 		WDTCTL = WDTPW | WDTCNTCL;		//clear watchdog each loop of the almighty while
 	if (!(P1IN & BIT4)){				//check if button is pushed and initiate functions if true
@@ -55,6 +58,7 @@ void main(void)
 
 	uint8_t buffer[4096];
 	memset(buffer,0xA5,4096);
+	WDTCTL = WDTPW | WDTCNTCL;
 	MAP_FlashCtl_unprotectSector(FLASH_INFO_MEMORY_SPACE_BANK1,FLASH_SECTOR0|FLASH_SECTOR1|FLASH_SECTOR2|FLASH_SECTOR3|FLASH_SECTOR4|FLASH_SECTOR5
 			|FLASH_SECTOR6|FLASH_SECTOR7|FLASH_SECTOR8|FLASH_SECTOR9|FLASH_SECTOR10|FLASH_SECTOR11|FLASH_SECTOR12|FLASH_SECTOR13|FLASH_SECTOR14
 			|FLASH_SECTOR15|FLASH_SECTOR16|FLASH_SECTOR17|FLASH_SECTOR18|FLASH_SECTOR19|FLASH_SECTOR20|FLASH_SECTOR21|FLASH_SECTOR22|FLASH_SECTOR23
@@ -68,7 +72,8 @@ void main(void)
 			|FLASH_SECTOR15|FLASH_SECTOR16|FLASH_SECTOR17|FLASH_SECTOR18|FLASH_SECTOR19|FLASH_SECTOR20|FLASH_SECTOR21|FLASH_SECTOR22|FLASH_SECTOR23
 			|FLASH_SECTOR24|FLASH_SECTOR25|FLASH_SECTOR26|FLASH_SECTOR27|FLASH_SECTOR28|FLASH_SECTOR29|FLASH_SECTOR30|FLASH_SECTOR31);
     memoryOffset++;
-    if (memoryOffset>=32){
+//    if ((memoryOffset*4096+BUFFER_MEMORY_START)>=MEM_UPPER_LIMIT){
+    	if(memoryOffset>=32){
     	P2OUT |= BIT1;
     	delay_1sec();
     	WDTCTL = (WDTPW-1);
