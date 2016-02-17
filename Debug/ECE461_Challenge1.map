@@ -1,17 +1,17 @@
 ******************************************************************************
                   TI ARM Linker PC v5.2.6                      
 ******************************************************************************
->> Linked Tue Feb 16 19:03:48 2016
+>> Linked Tue Feb 16 19:15:38 2016
 
 OUTPUT FILE NAME:   <ECE461_Challenge1.out>
-ENTRY POINT SYMBOL: "_c_int00"  address: 000012d1
+ENTRY POINT SYMBOL: "_c_int00"  address: 000012e5
 
 
 MEMORY CONFIGURATION
 
          name            origin    length      used     unused   attr    fill
 ----------------------  --------  ---------  --------  --------  ----  --------
-  MAIN                  00000000   00040000  00001620  0003e9e0  R  X
+  MAIN                  00000000   00040000  00001634  0003e9cc  R  X
   INFO                  00200000   00004000  00000000  00004000  R  X
   SRAM_CODE             01000000   00010000  00000000  00010000  RW X
   SRAM_DATA             20000000   00010000  0000025c  0000fda4  RW  
@@ -21,10 +21,10 @@ SEGMENT ALLOCATION MAP
 
 run origin  load origin   length   init length attrs members
 ----------  ----------- ---------- ----------- ----- -------
-00000000    00000000    00001624   00001624    r-x
+00000000    00000000    00001634   00001634    r-x
   00000000    00000000    00000140   00000140    r-- .intvecs
-  00000140    00000140    0000147c   0000147c    r-x .text
-  000015c0    000015c0    00000064   00000064    r-- .cinit
+  00000140    00000140    00001490   00001490    r-x .text
+  000015d0    000015d0    00000064   00000064    r-- .cinit
 20000000    20000000    0000005c   00000000    rw-
   20000000    20000000    0000005c   00000000    rw- .data
 2000fe00    2000fe00    00000200   00000000    rw-
@@ -39,61 +39,61 @@ section   page    origin      length       input sections
 .intvecs   0    00000000    00000140     
                   00000000    00000140     startup_msp432p401r_ccs.obj (.intvecs:retain)
 
-.text      0    00000140    0000147c     
+.text      0    00000140    00001490     
                   00000140    00000348     system_msp432p401r.obj (.text)
                   00000488    000001d4     msp432p4xx_driverlib.lib : flash.o (.text:FlashCtl_verifyMemory)
-                  0000065c    00000180                              : flash.o (.text:_FlashCtl_ProgramBurst)
-                  000007dc    00000180     main.obj (.text)
-                  0000095c    000000fa     msp432p4xx_driverlib.lib : flash.o (.text:FlashCtl_programMemory)
-                  00000a56    00000002     --HOLE-- [fill = 0]
-                  00000a58    000000ec                              : flash.o (.text:FlashCtl_eraseSector)
-                  00000b44    000000e4                              : flash.o (.text:__FlashCtl_remaskBurstDataPost)
-                  00000c28    000000e4                              : flash.o (.text:__FlashCtl_remaskBurstDataPre)
-                  00000d0c    000000b0                              : flash.o (.text:_FlashCtl_Program32)
-                  00000dbc    000000ac                              : flash.o (.text:__FlashCtl_remaskData32Post)
-                  00000e68    000000ac                              : flash.o (.text:__FlashCtl_remaskData32Pre)
-                  00000f14    000000a8                              : flash.o (.text:_FlashCtl_Program8)
-                  00000fbc    0000009c     rtsv7M4_T_le_v4SPD16_eabi.lib : memcpy_t2.obj (.text)
-                  00001058    0000007a                                   : memset_t2.obj (.text)
-                  000010d2    00000002     --HOLE-- [fill = 0]
-                  000010d4    0000006c     msp432p4xx_driverlib.lib : flash.o (.text:__FlashCtl_remaskData8Pre)
-                  00001140    0000006c     rtsv7M4_T_le_v4SPD16_eabi.lib : autoinit.obj (.text)
-                  000011ac    0000006a                                   : copy_decompress_rle.obj (.text)
-                  00001216    00000002     --HOLE-- [fill = 0]
-                  00001218    00000068     msp432p4xx_driverlib.lib : flash.o (.text:__FlashCtl_remaskData8Post)
-                  00001280    00000050                              : sysctl.o (.text:SysCtl_getTLVInfo)
-                  000012d0    00000050     rtsv7M4_T_le_v4SPD16_eabi.lib : boot.obj (.text)
-                  00001320    0000004c     msp432p4xx_driverlib.lib : flash.o (.text:FlashCtl_setReadMode)
-                  0000136c    0000004c     rtsv7M4_T_le_v4SPD16_eabi.lib : cpy_tbl.obj (.text)
-                  000013b8    00000044                                   : exit.obj (.text)
-                  000013fc    0000003c     msp432p4xx_driverlib.lib : flash.o (.text:FlashCtl_clearProgramVerification)
-                  00001438    00000038                              : flash.o (.text:FlashCtl_setProgramVerification)
-                  00001470    00000028                              : flash.o (.text:FlashCtl_setWaitState)
-                  00001498    00000024                              : flash.o (.text:FlashCtl_getReadMode)
-                  000014bc    00000020                              : flash.o (.text:FlashCtl_enableWordProgramming)
-                  000014dc    0000001c                              : flash.o (.text:FlashCtl_getWaitState)
-                  000014f8    00000018     rtsv7M4_T_le_v4SPD16_eabi.lib : args_main.obj (.text)
-                  00001510    00000014                                   : _lock.obj (.text)
-                  00001524    00000012     startup_msp432p401r_ccs.obj (.text)
-                  00001536    00000002     --HOLE-- [fill = 0]
-                  00001538    00000010     msp432p4xx_driverlib.lib : flash.o (.text:FlashCtl_disableWordProgramming)
-                  00001548    00000010                              : interrupt.o (.text:Interrupt_disableMaster)
-                  00001558    00000010                              : interrupt.o (.text:Interrupt_enableMaster)
-                  00001568    0000000e     rtsv7M4_T_le_v4SPD16_eabi.lib : copy_decompress_none.obj (.text:decompress:none)
-                  00001576    0000000c     msp432p4xx_driverlib.lib : cpu.o (.text:CPU_cpsid)
-                  00001582    0000000c                              : cpu.o (.text:CPU_cpsie)
-                  0000158e    00000002     --HOLE-- [fill = 0]
-                  00001590    0000000c                              : flash.o (.text:FlashCtl_getInterruptStatus)
-                  0000159c    0000000c                              : sysctl.o (.text:SysCtl_getFlashSize)
-                  000015a8    0000000a                              : cpu.o (.text:CPU_primask)
-                  000015b2    00000006     rtsv7M4_T_le_v4SPD16_eabi.lib : copy_decompress_rle.obj (.text:decompress:rle24)
-                  000015b8    00000004                                   : pre_init.obj (.text)
+                  0000065c    00000194     main.obj (.text)
+                  000007f0    00000180     msp432p4xx_driverlib.lib : flash.o (.text:_FlashCtl_ProgramBurst)
+                  00000970    000000fa                              : flash.o (.text:FlashCtl_programMemory)
+                  00000a6a    00000002     --HOLE-- [fill = 0]
+                  00000a6c    000000ec                              : flash.o (.text:FlashCtl_eraseSector)
+                  00000b58    000000e4                              : flash.o (.text:__FlashCtl_remaskBurstDataPost)
+                  00000c3c    000000e4                              : flash.o (.text:__FlashCtl_remaskBurstDataPre)
+                  00000d20    000000b0                              : flash.o (.text:_FlashCtl_Program32)
+                  00000dd0    000000ac                              : flash.o (.text:__FlashCtl_remaskData32Post)
+                  00000e7c    000000ac                              : flash.o (.text:__FlashCtl_remaskData32Pre)
+                  00000f28    000000a8                              : flash.o (.text:_FlashCtl_Program8)
+                  00000fd0    0000009c     rtsv7M4_T_le_v4SPD16_eabi.lib : memcpy_t2.obj (.text)
+                  0000106c    0000007a                                   : memset_t2.obj (.text)
+                  000010e6    00000002     --HOLE-- [fill = 0]
+                  000010e8    0000006c     msp432p4xx_driverlib.lib : flash.o (.text:__FlashCtl_remaskData8Pre)
+                  00001154    0000006c     rtsv7M4_T_le_v4SPD16_eabi.lib : autoinit.obj (.text)
+                  000011c0    0000006a                                   : copy_decompress_rle.obj (.text)
+                  0000122a    00000002     --HOLE-- [fill = 0]
+                  0000122c    00000068     msp432p4xx_driverlib.lib : flash.o (.text:__FlashCtl_remaskData8Post)
+                  00001294    00000050                              : sysctl.o (.text:SysCtl_getTLVInfo)
+                  000012e4    00000050     rtsv7M4_T_le_v4SPD16_eabi.lib : boot.obj (.text)
+                  00001334    0000004c     msp432p4xx_driverlib.lib : flash.o (.text:FlashCtl_setReadMode)
+                  00001380    0000004c     rtsv7M4_T_le_v4SPD16_eabi.lib : cpy_tbl.obj (.text)
+                  000013cc    00000044                                   : exit.obj (.text)
+                  00001410    0000003c     msp432p4xx_driverlib.lib : flash.o (.text:FlashCtl_clearProgramVerification)
+                  0000144c    00000038                              : flash.o (.text:FlashCtl_setProgramVerification)
+                  00001484    00000028                              : flash.o (.text:FlashCtl_setWaitState)
+                  000014ac    00000024                              : flash.o (.text:FlashCtl_getReadMode)
+                  000014d0    00000020                              : flash.o (.text:FlashCtl_enableWordProgramming)
+                  000014f0    0000001c                              : flash.o (.text:FlashCtl_getWaitState)
+                  0000150c    00000018     rtsv7M4_T_le_v4SPD16_eabi.lib : args_main.obj (.text)
+                  00001524    00000014                                   : _lock.obj (.text)
+                  00001538    00000012     startup_msp432p401r_ccs.obj (.text)
+                  0000154a    00000002     --HOLE-- [fill = 0]
+                  0000154c    00000010     msp432p4xx_driverlib.lib : flash.o (.text:FlashCtl_disableWordProgramming)
+                  0000155c    00000010                              : interrupt.o (.text:Interrupt_disableMaster)
+                  0000156c    00000010                              : interrupt.o (.text:Interrupt_enableMaster)
+                  0000157c    0000000e     rtsv7M4_T_le_v4SPD16_eabi.lib : copy_decompress_none.obj (.text:decompress:none)
+                  0000158a    0000000c     msp432p4xx_driverlib.lib : cpu.o (.text:CPU_cpsid)
+                  00001596    0000000c                              : cpu.o (.text:CPU_cpsie)
+                  000015a2    00000002     --HOLE-- [fill = 0]
+                  000015a4    0000000c                              : flash.o (.text:FlashCtl_getInterruptStatus)
+                  000015b0    0000000c                              : sysctl.o (.text:SysCtl_getFlashSize)
+                  000015bc    0000000a                              : cpu.o (.text:CPU_primask)
+                  000015c6    00000006     rtsv7M4_T_le_v4SPD16_eabi.lib : copy_decompress_rle.obj (.text:decompress:rle24)
+                  000015cc    00000004                                   : pre_init.obj (.text)
 
-.cinit     0    000015c0    00000064     
-                  000015c0    00000053     (.cinit..data.load) [load image, compression = rle]
-                  00001613    00000001     --HOLE-- [fill = 0]
-                  00001614    00000008     (__TI_handler_table)
-                  0000161c    00000008     (__TI_cinit_table)
+.cinit     0    000015d0    00000064     
+                  000015d0    00000053     (.cinit..data.load) [load image, compression = rle]
+                  00001623    00000001     --HOLE-- [fill = 0]
+                  00001624    00000008     (__TI_handler_table)
+                  0000162c    00000008     (__TI_cinit_table)
 
 .init_array 
 *          0    00000000    00000000     UNINITIALIZED
@@ -115,13 +115,13 @@ section   page    origin      length       input sections
 
 LINKER GENERATED COPY TABLES
 
-__TI_cinit_table @ 0000161c records: 1, size/record: 8, table size: 8
-	.data: load addr=000015c0, load size=00000053 bytes, run addr=20000000, run size=0000005c bytes, compression=rle
+__TI_cinit_table @ 0000162c records: 1, size/record: 8, table size: 8
+	.data: load addr=000015d0, load size=00000053 bytes, run addr=20000000, run size=0000005c bytes, compression=rle
 
 
 LINKER GENERATED HANDLER TABLE
 
-__TI_handler_table @ 00001614 records: 2, size/record: 4, table size: 8
+__TI_handler_table @ 00001624 records: 2, size/record: 4, table size: 8
 	index: 0, handler: __TI_decompress_rle24
 	index: 1, handler: __TI_decompress_none
 
@@ -130,82 +130,82 @@ GLOBAL SYMBOLS: SORTED ALPHABETICALLY BY Name
 
 address   name                             
 -------   ----                             
-000013b9  C$$EXIT                          
-00001577  CPU_cpsid                        
-00001583  CPU_cpsie                        
-000015a9  CPU_primask                      
-000013fd  FlashCtl_clearProgramVerification
-00001539  FlashCtl_disableWordProgramming  
-000014bd  FlashCtl_enableWordProgramming   
-00000a59  FlashCtl_eraseSector             
-00001591  FlashCtl_getInterruptStatus      
-00001499  FlashCtl_getReadMode             
-000014dd  FlashCtl_getWaitState            
-0000095d  FlashCtl_programMemory           
-00001439  FlashCtl_setProgramVerification  
-00001321  FlashCtl_setReadMode             
-00001471  FlashCtl_setWaitState            
+000013cd  C$$EXIT                          
+0000158b  CPU_cpsid                        
+00001597  CPU_cpsie                        
+000015bd  CPU_primask                      
+00001411  FlashCtl_clearProgramVerification
+0000154d  FlashCtl_disableWordProgramming  
+000014d1  FlashCtl_enableWordProgramming   
+00000a6d  FlashCtl_eraseSector             
+000015a5  FlashCtl_getInterruptStatus      
+000014ad  FlashCtl_getReadMode             
+000014f1  FlashCtl_getWaitState            
+00000971  FlashCtl_programMemory           
+0000144d  FlashCtl_setProgramVerification  
+00001335  FlashCtl_setReadMode             
+00001485  FlashCtl_setWaitState            
 00000489  FlashCtl_verifyMemory            
-00001549  Interrupt_disableMaster          
-00001559  Interrupt_enableMaster           
+0000155d  Interrupt_disableMaster          
+0000156d  Interrupt_enableMaster           
 UNDEFED   SHT$$INIT_ARRAY$$Base            
 UNDEFED   SHT$$INIT_ARRAY$$Limit           
-0000159d  SysCtl_getFlashSize              
-00001281  SysCtl_getTLVInfo                
+000015b1  SysCtl_getFlashSize              
+00001295  SysCtl_getTLVInfo                
 20000058  SystemCoreClock                  
 00000141  SystemCoreClockUpdate            
 000003b5  SystemInit                       
 4000480c  WDTCTL_SYM                       
-00000b45  __FlashCtl_remaskBurstDataPost   
-00000c29  __FlashCtl_remaskBurstDataPre    
-00000dbd  __FlashCtl_remaskData32Post      
-00000e69  __FlashCtl_remaskData32Pre       
-00001219  __FlashCtl_remaskData8Post       
-000010d5  __FlashCtl_remaskData8Pre        
+00000b59  __FlashCtl_remaskBurstDataPost   
+00000c3d  __FlashCtl_remaskBurstDataPre    
+00000dd1  __FlashCtl_remaskData32Post      
+00000e7d  __FlashCtl_remaskData32Pre       
+0000122d  __FlashCtl_remaskData8Post       
+000010e9  __FlashCtl_remaskData8Pre        
 20010000  __STACK_END                      
 00000200  __STACK_SIZE                     
-0000161c  __TI_CINIT_Base                  
-00001624  __TI_CINIT_Limit                 
-00001614  __TI_Handler_Table_Base          
-0000161c  __TI_Handler_Table_Limit         
-00001141  __TI_auto_init                   
+0000162c  __TI_CINIT_Base                  
+00001634  __TI_CINIT_Limit                 
+00001624  __TI_Handler_Table_Base          
+0000162c  __TI_Handler_Table_Limit         
+00001155  __TI_auto_init                   
 20000048  __TI_cleanup_ptr                 
-00001569  __TI_decompress_none             
-000015b3  __TI_decompress_rle24            
+0000157d  __TI_decompress_none             
+000015c7  __TI_decompress_rle24            
 2000004c  __TI_dtors_ptr                   
 00000000  __TI_static_base__               
-00001059  __aeabi_memclr                   
-00001059  __aeabi_memclr4                  
-00001059  __aeabi_memclr8                  
-00000fbd  __aeabi_memcpy                   
-00000fbd  __aeabi_memcpy4                  
-00000fbd  __aeabi_memcpy8                  
-0000105b  __aeabi_memset                   
-0000105b  __aeabi_memset4                  
-0000105b  __aeabi_memset8                  
+0000106d  __aeabi_memclr                   
+0000106d  __aeabi_memclr4                  
+0000106d  __aeabi_memclr8                  
+00000fd1  __aeabi_memcpy                   
+00000fd1  __aeabi_memcpy4                  
+00000fd1  __aeabi_memcpy8                  
+0000106f  __aeabi_memset                   
+0000106f  __aeabi_memset4                  
+0000106f  __aeabi_memset8                  
 ffffffff  __binit__                        
 ffffffff  __c_args__                       
 2000fe00  __stack                          
-000014f9  _args_main                       
-000012d1  _c_int00                         
+0000150d  _args_main                       
+000012e5  _c_int00                         
 20000040  _lock                            
-0000151f  _nop                             
-00001517  _register_lock                   
-00001511  _register_unlock                 
-000015b9  _system_pre_init                 
+00001533  _nop                             
+0000152b  _register_lock                   
+00001525  _register_unlock                 
+000015cd  _system_pre_init                 
 20000044  _unlock                          
-000013bd  abort                            
+000013d1  abort                            
 ffffffff  binit                            
-0000136d  copy_in                          
-00000825  delay_1sec                       
-000013c5  exit                             
+00001381  copy_in                          
+000006a5  delay_1sec                       
+000013d9  exit                             
 00000000  interruptVectors                 
-0000084b  main                             
+000006cb  main                             
 20000054  main_func_sp                     
-00000fbd  memcpy                           
+00000fd1  memcpy                           
 20000050  memory_location                  
-00001061  memset                           
-000007dd  port_init                        
+00001075  memset                           
+0000065d  port_init                        
 
 
 GLOBAL SYMBOLS: SORTED BY Symbol Address 
@@ -218,61 +218,61 @@ address   name
 00000200  __STACK_SIZE                     
 000003b5  SystemInit                       
 00000489  FlashCtl_verifyMemory            
-000007dd  port_init                        
-00000825  delay_1sec                       
-0000084b  main                             
-0000095d  FlashCtl_programMemory           
-00000a59  FlashCtl_eraseSector             
-00000b45  __FlashCtl_remaskBurstDataPost   
-00000c29  __FlashCtl_remaskBurstDataPre    
-00000dbd  __FlashCtl_remaskData32Post      
-00000e69  __FlashCtl_remaskData32Pre       
-00000fbd  __aeabi_memcpy                   
-00000fbd  __aeabi_memcpy4                  
-00000fbd  __aeabi_memcpy8                  
-00000fbd  memcpy                           
-00001059  __aeabi_memclr                   
-00001059  __aeabi_memclr4                  
-00001059  __aeabi_memclr8                  
-0000105b  __aeabi_memset                   
-0000105b  __aeabi_memset4                  
-0000105b  __aeabi_memset8                  
-00001061  memset                           
-000010d5  __FlashCtl_remaskData8Pre        
-00001141  __TI_auto_init                   
-00001219  __FlashCtl_remaskData8Post       
-00001281  SysCtl_getTLVInfo                
-000012d1  _c_int00                         
-00001321  FlashCtl_setReadMode             
-0000136d  copy_in                          
-000013b9  C$$EXIT                          
-000013bd  abort                            
-000013c5  exit                             
-000013fd  FlashCtl_clearProgramVerification
-00001439  FlashCtl_setProgramVerification  
-00001471  FlashCtl_setWaitState            
-00001499  FlashCtl_getReadMode             
-000014bd  FlashCtl_enableWordProgramming   
-000014dd  FlashCtl_getWaitState            
-000014f9  _args_main                       
-00001511  _register_unlock                 
-00001517  _register_lock                   
-0000151f  _nop                             
-00001539  FlashCtl_disableWordProgramming  
-00001549  Interrupt_disableMaster          
-00001559  Interrupt_enableMaster           
-00001569  __TI_decompress_none             
-00001577  CPU_cpsid                        
-00001583  CPU_cpsie                        
-00001591  FlashCtl_getInterruptStatus      
-0000159d  SysCtl_getFlashSize              
-000015a9  CPU_primask                      
-000015b3  __TI_decompress_rle24            
-000015b9  _system_pre_init                 
-00001614  __TI_Handler_Table_Base          
-0000161c  __TI_CINIT_Base                  
-0000161c  __TI_Handler_Table_Limit         
-00001624  __TI_CINIT_Limit                 
+0000065d  port_init                        
+000006a5  delay_1sec                       
+000006cb  main                             
+00000971  FlashCtl_programMemory           
+00000a6d  FlashCtl_eraseSector             
+00000b59  __FlashCtl_remaskBurstDataPost   
+00000c3d  __FlashCtl_remaskBurstDataPre    
+00000dd1  __FlashCtl_remaskData32Post      
+00000e7d  __FlashCtl_remaskData32Pre       
+00000fd1  __aeabi_memcpy                   
+00000fd1  __aeabi_memcpy4                  
+00000fd1  __aeabi_memcpy8                  
+00000fd1  memcpy                           
+0000106d  __aeabi_memclr                   
+0000106d  __aeabi_memclr4                  
+0000106d  __aeabi_memclr8                  
+0000106f  __aeabi_memset                   
+0000106f  __aeabi_memset4                  
+0000106f  __aeabi_memset8                  
+00001075  memset                           
+000010e9  __FlashCtl_remaskData8Pre        
+00001155  __TI_auto_init                   
+0000122d  __FlashCtl_remaskData8Post       
+00001295  SysCtl_getTLVInfo                
+000012e5  _c_int00                         
+00001335  FlashCtl_setReadMode             
+00001381  copy_in                          
+000013cd  C$$EXIT                          
+000013d1  abort                            
+000013d9  exit                             
+00001411  FlashCtl_clearProgramVerification
+0000144d  FlashCtl_setProgramVerification  
+00001485  FlashCtl_setWaitState            
+000014ad  FlashCtl_getReadMode             
+000014d1  FlashCtl_enableWordProgramming   
+000014f1  FlashCtl_getWaitState            
+0000150d  _args_main                       
+00001525  _register_unlock                 
+0000152b  _register_lock                   
+00001533  _nop                             
+0000154d  FlashCtl_disableWordProgramming  
+0000155d  Interrupt_disableMaster          
+0000156d  Interrupt_enableMaster           
+0000157d  __TI_decompress_none             
+0000158b  CPU_cpsid                        
+00001597  CPU_cpsie                        
+000015a5  FlashCtl_getInterruptStatus      
+000015b1  SysCtl_getFlashSize              
+000015bd  CPU_primask                      
+000015c7  __TI_decompress_rle24            
+000015cd  _system_pre_init                 
+00001624  __TI_Handler_Table_Base          
+0000162c  __TI_CINIT_Base                  
+0000162c  __TI_Handler_Table_Limit         
+00001634  __TI_CINIT_Limit                 
 20000040  _lock                            
 20000044  _unlock                          
 20000048  __TI_cleanup_ptr                 

@@ -33,10 +33,9 @@ void delay_1sec()      	// 1 second delay for 1.5 MHz clock
 
 void main(void)
 {
-	WDTCTL = WDTPW | WDTCNTCL;
+	WDTCTL = WDTPW |WDTSSEL_3|WDTIS_4|WDTCNTCL;	// Watchdog timer set to expire every second
 	port_init();
 	memory_location = BUFFER_MEMORY_START;					//making sure my offset is set to 0
-	WDTCTL = WDTPW |WDTSSEL_3|WDTIS_4|WDTCNTCL;	// Watchdog timer set to expire every second
 
 //	PCM_setCoreVoltageLevel(PCM_VCORE1);
 //	MAP_FlashCtl_setWaitState(FLASH_BANK0,2);
@@ -58,11 +57,16 @@ void main(void)
 			|FLASH_SECTOR6|FLASH_SECTOR7|FLASH_SECTOR8|FLASH_SECTOR9|FLASH_SECTOR10|FLASH_SECTOR11|FLASH_SECTOR12|FLASH_SECTOR13|FLASH_SECTOR14
 			|FLASH_SECTOR15|FLASH_SECTOR16|FLASH_SECTOR17|FLASH_SECTOR18|FLASH_SECTOR19|FLASH_SECTOR20|FLASH_SECTOR21|FLASH_SECTOR22|FLASH_SECTOR23
 			|FLASH_SECTOR24|FLASH_SECTOR25|FLASH_SECTOR26|FLASH_SECTOR27|FLASH_SECTOR28|FLASH_SECTOR29|FLASH_SECTOR30|FLASH_SECTOR31);
-
-	while(!MAP_FlashCtl_eraseSector(memory_location));
 	WDTCTL = WDTPW | WDTCNTCL;
 
-    while(!MAP_FlashCtl_programMemory(buffer,(void*) memory_location, 4096 ));
+	while(!MAP_FlashCtl_eraseSector(memory_location)){
+		WDTCTL = WDTPW | WDTCNTCL;
+	}
+	WDTCTL = WDTPW | WDTCNTCL;
+
+    while(!MAP_FlashCtl_programMemory(buffer,(void*) memory_location, 4096 )){
+    	WDTCTL = WDTPW | WDTCNTCL;
+    }
     WDTCTL = WDTPW | WDTCNTCL;
 
     MAP_FlashCtl_protectSector(FLASH_INFO_MEMORY_SPACE_BANK1,FLASH_SECTOR0|FLASH_SECTOR1|FLASH_SECTOR2|FLASH_SECTOR3|FLASH_SECTOR4|FLASH_SECTOR5
