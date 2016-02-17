@@ -64,9 +64,7 @@ void main(void)
 	}
 	WDTCTL = WDTPW | WDTCNTCL;
 
-    while(!MAP_FlashCtl_programMemory(buffer,(void*) memory_location, 4096 )){
-    	WDTCTL = WDTPW | WDTCNTCL;
-    }
+    while(!MAP_FlashCtl_programMemory(buffer,(void*) memory_location, 4096 ));
     WDTCTL = WDTPW | WDTCNTCL;
 
     MAP_FlashCtl_protectSector(FLASH_INFO_MEMORY_SPACE_BANK1,FLASH_SECTOR0|FLASH_SECTOR1|FLASH_SECTOR2|FLASH_SECTOR3|FLASH_SECTOR4|FLASH_SECTOR5
